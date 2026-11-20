@@ -38,14 +38,16 @@ def summarize_chunk(chunk, start_year, end_year):
     counties = chunk["BUYER_COUNTY"].str.strip().str.upper()
     drugs = chunk["DRUG_CODE"].str.strip()
     geography_ok = states.str.fullmatch(r"[A-Z]{2}").fillna(False) & counties.ne("").fillna(False)
-    drug_ok = drugs.str.fullmatch(r"\d{4}").fillna(False)
+    # Actual identifiers include suffixes, e.g. 9250B (methadone).
+    # Preserve source codes; taxonomy selection belongs downstream.
+    drug_ok = drugs.ne("").fillna(False)
     audits = Counter({
         "rows_read": len(chunk),
         "invalid_dates": int(dates.isna().sum()),
         "invalid_or_nonfinite_weights": int((~finite).sum()),
         "negative_weights": int((finite & weights.lt(0).fillna(False)).sum()),
         "invalid_geography": int((~geography_ok).sum()),
-        "invalid_drug_codes": int((~drug_ok).sum()),
+        "missing_drug_codes": int((~drug_ok).sum()),
     })
     checks = [
         ("excluded_invalid_date", dates.notna()),
@@ -53,7 +55,7 @@ def summarize_chunk(chunk, start_year, end_year):
         ("excluded_alaska", states.ne("AK")),
         ("excluded_non_sale", chunk["TRANSACTION_CODE"].eq("S")),
         ("excluded_geography", geography_ok),
-        ("excluded_drug_code", drug_ok),
+        ("excluded_missing_drug_code", drug_ok),
         ("excluded_invalid_weight", finite),
         ("excluded_negative_weight", weights.ge(0)),
     ]

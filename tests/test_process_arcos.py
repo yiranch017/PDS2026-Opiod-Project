@@ -71,17 +71,20 @@ class StreamingTests(unittest.TestCase):
             record("2"), record("0"), record(""), record("nan"), record("inf"),
             record("-5"), record(TRANSACTION_DATE="2010-02-30"),
             record(TRANSACTION_DATE="2019-01-01"), record(BUYER_STATE="AK"),
-            record(TRANSACTION_CODE="R"), record(BUYER_COUNTY=" "), record(DRUG_CODE="bad"),
+            record(TRANSACTION_CODE="R"), record(BUYER_COUNTY=" "), record(DRUG_CODE=""),
+            record("4", DRUG_CODE="9250B", DRUG_NAME="METHADONE"),
         ]
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             archive, output = root / "input.zip", root / "result"
             make_archive(archive, records)
             audit = run(options(archive, output))
-            self.assertEqual(audit["counts"]["rows_read"], 12)
-            self.assertEqual(audit["counts"]["rows_retained"], 2)
+            self.assertEqual(audit["counts"]["rows_read"], 13)
+            self.assertEqual(audit["counts"]["rows_retained"], 3)
             self.assertEqual(audit["counts"]["invalid_or_nonfinite_weights"], 3)
-            self.assertEqual(audit["aggregate_weight_g"], 2)
+            self.assertEqual(audit["aggregate_weight_g"], 6)
+            result = pd.read_parquet(output / "shipments_county_name_year_drug.parquet")
+            self.assertIn("9250B", result["drug_code"].tolist())
             self.assertEqual(audit["transaction_codes"]["R"], 1)
 
     def test_pilot_is_bounded_and_existing_output_is_protected(self):
