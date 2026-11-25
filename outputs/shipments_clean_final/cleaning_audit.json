@@ -1,0 +1,23 @@
+{
+  "status": "complete",
+  "validated": true,
+  "source_mode": "full",
+  "source_records": 488155369,
+  "source_weight_g": 16461184994.33994,
+  "outside_scope_records": 763426,
+  "outside_scope_weight_g": 90130005.16738552,
+  "excluded_buyer_records": 53828408,
+  "excluded_buyer_weight_g": 15055432159.885057,
+  "unmatched_direct_buyer_records": 1649,
+  "unmatched_direct_buyer_weight_g": 3909.3931276149997,
+  "main_records": 433561886,
+  "main_weight_g": 1315618919.8943682,
+  "main_drug_rows": 336410,
+  "county_year_rows": 30796,
+  "county_years_with_shipments": 29993,
+  "county_years_without_shipments": 803,
+  "unmatched_name_years": 67,
+  "flagged_large_county_year_drug_rows": 3645,
+  "source_label_disagreements": 120,
+  "sampled_peak_rss_mib": 882.17
+}
