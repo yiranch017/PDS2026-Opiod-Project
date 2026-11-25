@@ -1,1 +1,57 @@
-# PDS2026-Opiod-Project
+# Opioid Policy Project
+
+We examine changes in opioid shipments and overdose mortality following prescribing regulations in Florida (2010) and Washington (2012), using county-year data from 2006–2015.
+
+## Data
+
+- DEA ARCOS shipment records
+- County-level Vital Statistics mortality records
+- County population estimates
+
+## Process shipments
+
+Install the dependencies in `requirements.txt`, then run a sample:
+
+```bash
+python src/process_arcos.py --zip /path/to/arcos_all.zip --output outputs/arcos_pilot
+```
+
+To process the full archive:
+
+```bash
+python src/process_arcos.py --zip /path/to/arcos_all.zip --output outputs/arcos_full --full
+```
+
+Use a new output directory for each run. The script reads the ZIP directly in 50,000-row chunks and combines the aggregated Parquet files.
+
+Shipments are grouped by buyer state, county name, year, drug code, and buyer type. Processing keeps sale transactions (`S`) from 2006–2015 outside Alaska. Missing, nonfinite, and negative weights are excluded and recorded in the audit.
+
+## Clean shipments
+
+Place the provided Vital Statistics ZIP in `data/raw/US_VitalStatistics.zip`, then run:
+
+```bash
+python src/clean_shipments.py --shipments outputs/arcos_full/shipments_by_buyer_type.parquet --mortality-zip data/raw/US_VitalStatistics.zip --output outputs/shipments_clean
+```
+
+The main measure includes community pharmacies and practitioners. Other buyer types are retained separately. County names are matched to five-digit FIPS using the annual mortality files. [Cleaning decisions](docs/data_cleaning.md) describes the choices and remaining limitations.
+
+## Outputs
+
+| File | Contents |
+| --- | --- |
+| `shipments_by_buyer_type.parquet` | Shipment totals by source location, year, drug, and buyer type |
+| `audit.json` | Processing status, exclusions, and validation results |
+| `drug_labels.csv` | Drug codes and names in the source data |
+| `shipments_county_year.parquet` | Main shipment measure keyed by `county_fips` and `year` |
+| `shipments_county_year_drug.parquet` | Main shipment measure with separate drug codes |
+| `shipments_by_buyer_type_fips.parquet` | All retained buyer channels, with geographic matching results |
+| `cleaning_audit.json` | Cleaning exclusions and reconciliation checks |
+
+Cleaning also produces CSV files for unmatched locations, missing county-years, buyer types, drug-label disagreements, and large shipments requiring review. Use a cleaned output only when `cleaning_audit.json` reports `status: complete` and `validated: true`. Population normalization and mortality merging follow this step. Raw data and generated outputs are kept outside version control.
+
+## Tests
+
+```bash
+python -m unittest discover -s tests -v
+```
