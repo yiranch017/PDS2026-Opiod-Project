@@ -21,10 +21,10 @@ import psutil
 
 USECOLS = [
     "BUYER_STATE", "BUYER_COUNTY", "TRANSACTION_CODE", "DRUG_CODE",
-    "DRUG_NAME", "TRANSACTION_DATE", "CALC_BASE_WT_IN_GM",
+    "DRUG_NAME", "TRANSACTION_DATE", "CALC_BASE_WT_IN_GM", "BUYER_BUS_ACT",
 ]
-KEYS = ["buyer_state", "buyer_county", "year", "drug_code"]
-VALUES = ["base_weight_g", "shipment_records"]
+KEYS = ["buyer_state", "buyer_county", "year", "drug_code", "buyer_type"]
+AGGREGATIONS = {"base_weight_g": "sum", "shipment_records": "sum", "largest_shipment_g": "max"}
 DTYPES = {column: "string" for column in USECOLS}
 
 
@@ -37,9 +37,8 @@ def summarize_chunk(chunk, start_year, end_year):
     states = chunk["BUYER_STATE"].str.strip().str.upper()
     counties = chunk["BUYER_COUNTY"].str.strip().str.upper()
     drugs = chunk["DRUG_CODE"].str.strip()
+    buyer_types = chunk["BUYER_BUS_ACT"].str.strip().str.upper().replace("", "UNKNOWN").fillna("UNKNOWN")
     geography_ok = states.str.fullmatch(r"[A-Z]{2}").fillna(False) & counties.ne("").fillna(False)
-    # Actual identifiers include suffixes, e.g. 9250B (methadone).
-    # Preserve source codes; taxonomy selection belongs downstream.
     drug_ok = drugs.ne("").fillna(False)
     audits = Counter({
         "rows_read": len(chunk),
@@ -48,6 +47,7 @@ def summarize_chunk(chunk, start_year, end_year):
         "negative_weights": int((finite & weights.lt(0).fillna(False)).sum()),
         "invalid_geography": int((~geography_ok).sum()),
         "missing_drug_codes": int((~drug_ok).sum()),
+        "missing_buyer_types": int(buyer_types.eq("UNKNOWN").sum()),
     })
     checks = [
         ("excluded_invalid_date", dates.notna()),
@@ -67,12 +67,14 @@ def summarize_chunk(chunk, start_year, end_year):
     selected = pd.DataFrame({
         "buyer_state": states[keep], "buyer_county": counties[keep],
         "year": years[keep].astype("int16"), "drug_code": drugs[keep],
+        "buyer_type": buyer_types[keep],
         "base_weight_g": weights[keep].astype("float64"),
         "shipment_records": np.int64(1),
+        "largest_shipment_g": weights[keep].astype("float64"),
     })
     audits["rows_retained"] = len(selected)
     total_weight = math.fsum(selected["base_weight_g"])
-    summary = selected.groupby(KEYS, as_index=False, observed=True, sort=False)[VALUES].sum()
+    summary = selected.groupby(KEYS, as_index=False, observed=True, sort=False).agg(AGGREGATIONS)
     transactions = Counter(chunk["TRANSACTION_CODE"].fillna("<missing>").value_counts().to_dict())
     labels = Counter(
         chunk[["DRUG_CODE", "DRUG_NAME"]].fillna("<missing>").value_counts().to_dict()
@@ -84,7 +86,7 @@ def merge_summaries(paths, destination):
     """Read two compact summaries, combining keys that cross chunk boundaries."""
     frames = [pd.read_parquet(path, dtype_backend="pyarrow") for path in paths]
     combined = pd.concat(frames, ignore_index=True)
-    totals = combined.groupby(KEYS, as_index=False, observed=True, sort=False)[VALUES].sum()
+    totals = combined.groupby(KEYS, as_index=False, observed=True, sort=False).agg(AGGREGATIONS)
     if not np.isfinite(totals["base_weight_g"].to_numpy(dtype=float)).all():
         raise ValueError("Nonfinite aggregate weight; outputs were not validated.")
     totals.to_parquet(destination, index=False, compression="snappy")
@@ -202,7 +204,7 @@ def run(args):
         "accepted_weight_g": 0.0, "validated": False,
     }
     counts, transactions, labels = Counter(), Counter(), Counter()
-    chunk_weights = []  # One scalar per chunk, not raw records or DataFrames.
+    chunk_weights = []
     try:
         with resource_guard(output, args.max_memory_mib, args.min_free_gib) as peak:
             reducer = ParquetReducer(output / "parts")
@@ -213,6 +215,12 @@ def run(args):
                     if len(candidates) != 1:
                         raise ValueError("Specify --member when the ZIP has multiple or no TSV members")
                     member = candidates[0]
+                member_info = archive.getinfo(member)
+                audit.update(
+                    source_member=member, source_crc32=f"{member_info.CRC:08x}",
+                    uncompressed_bytes_total=member_info.file_size,
+                    grouping_keys=KEYS,
+                )
                 with archive.open(member) as stream, pd.read_csv(
                     stream, sep="\t", usecols=USECOLS, dtype=DTYPES,
                     keep_default_na=False, chunksize=args.chunksize,
@@ -234,6 +242,7 @@ def run(args):
                             chunks_processed=number, accepted_weight_g=math.fsum(chunk_weights),
                             elapsed_seconds=round(time.monotonic() - start, 2),
                             sampled_peak_rss_mib=round(peak["rss_mib"], 2),
+                            uncompressed_bytes_read=stream.tell(),
                         )
                         if number == 1 or number % 20 == 0:
                             write_json(output / "audit.json", audit)
@@ -269,7 +278,7 @@ def run(args):
                 for (code, name), count in sorted(labels.items())
             ]
             pd.DataFrame(label_rows).to_csv(output / "drug_labels.csv", index=False)
-            provisional.replace(output / "shipments_county_name_year_drug.parquet")
+            provisional.replace(output / "shipments_by_buyer_type.parquet")
             write_json(output / "audit.json", audit)
             print(json.dumps(audit, indent=2), flush=True)
             return audit

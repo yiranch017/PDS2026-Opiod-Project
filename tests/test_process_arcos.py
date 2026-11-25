@@ -13,7 +13,7 @@ import zipfile
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from process_arcos import KEYS, USECOLS, run  # noqa: E402
+from process_arcos import KEYS, USECOLS, run
 
 
 def make_archive(path, records):
@@ -30,6 +30,7 @@ def record(weight="1.5", **updates):
         "BUYER_STATE": "FL", "BUYER_COUNTY": "TEST COUNTY",
         "TRANSACTION_CODE": "S", "DRUG_CODE": "9143", "DRUG_NAME": "OXYCODONE",
         "TRANSACTION_DATE": "2010-01-01", "CALC_BASE_WT_IN_GM": weight,
+        "BUYER_BUS_ACT": "RETAIL PHARMACY",
     }
     row.update(updates)
     return row
@@ -46,7 +47,6 @@ def options(archive, output, **updates):
 
 class StreamingTests(unittest.TestCase):
     def test_totals_across_many_chunks_match_known_reference(self):
-        # Same key recurs across chunks and reduction levels; WA must stay distinct.
         records = [record(str(value)) for value in range(1, 18)]
         records += [record("100", BUYER_STATE="WA"), record("200", DRUG_CODE="9193")]
         with tempfile.TemporaryDirectory() as directory:
@@ -54,12 +54,13 @@ class StreamingTests(unittest.TestCase):
             archive, output = root / "input.zip", root / "result"
             make_archive(archive, records)
             audit = run(options(archive, output))
-            result = pd.read_parquet(output / "shipments_county_name_year_drug.parquet")
+            result = pd.read_parquet(output / "shipments_by_buyer_type.parquet")
             self.assertEqual(len(result), 3)
             self.assertFalse(result.duplicated(KEYS).any())
             result = result.set_index(["buyer_state", "drug_code"])
             self.assertEqual(result.loc[("FL", "9143"), "base_weight_g"], 153)
             self.assertEqual(result.loc[("FL", "9143"), "shipment_records"], 17)
+            self.assertEqual(result.loc[("FL", "9143"), "largest_shipment_g"], 17)
             self.assertEqual(result.loc[("WA", "9143"), "base_weight_g"], 100)
             self.assertEqual(result.loc[("FL", "9193"), "base_weight_g"], 200)
             self.assertEqual(audit["aggregate_records"], 19)
@@ -83,7 +84,7 @@ class StreamingTests(unittest.TestCase):
             self.assertEqual(audit["counts"]["rows_retained"], 3)
             self.assertEqual(audit["counts"]["invalid_or_nonfinite_weights"], 3)
             self.assertEqual(audit["aggregate_weight_g"], 6)
-            result = pd.read_parquet(output / "shipments_county_name_year_drug.parquet")
+            result = pd.read_parquet(output / "shipments_by_buyer_type.parquet")
             self.assertIn("9250B", result["drug_code"].tolist())
             self.assertEqual(audit["transaction_codes"]["R"], 1)
 
@@ -109,7 +110,19 @@ class StreamingTests(unittest.TestCase):
             audit = json.loads((output / "audit.json").read_text())
             self.assertEqual(audit["status"], "failed")
             self.assertFalse(audit["validated"])
-            self.assertFalse((output / "shipments_county_name_year_drug.parquet").exists())
+            self.assertFalse((output / "shipments_by_buyer_type.parquet").exists())
+
+    def test_buyer_types_stay_separate(self):
+        records = [record("2"), record("100", BUYER_BUS_ACT="DISTRIBUTOR"), record("3")]
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            archive, output = root / "input.zip", root / "result"
+            make_archive(archive, records)
+            run(options(archive, output))
+            result = pd.read_parquet(output / "shipments_by_buyer_type.parquet").set_index("buyer_type")
+            self.assertEqual(result.loc["RETAIL PHARMACY", "base_weight_g"], 5)
+            self.assertEqual(result.loc["RETAIL PHARMACY", "largest_shipment_g"], 3)
+            self.assertEqual(result.loc["DISTRIBUTOR", "base_weight_g"], 100)
 
 
 if __name__ == "__main__":
