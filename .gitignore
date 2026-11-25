@@ -4,5 +4,6 @@ __pycache__/
 .DS_Store
 data/raw/
 data/interim/
-outputs/
+outputs/*
+!outputs/shipments_clean_final/
 *.log

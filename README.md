@@ -38,6 +38,8 @@ The main measure includes community pharmacies and practitioners. Other buyer ty
 
 ## Outputs
 
+The cleaned tables and review files are in [outputs/shipments_clean_final](outputs/shipments_clean_final). Start with [shipments_county_year.parquet](outputs/shipments_clean_final/shipments_county_year.parquet) for the mortality/population merge: 30,796 rows, keyed by `county_fips` and `year`.
+
 | File | Contents |
 | --- | --- |
 | `shipments_by_buyer_type.parquet` | Shipment totals by source location, year, drug, and buyer type |
@@ -48,7 +50,7 @@ The main measure includes community pharmacies and practitioners. Other buyer ty
 | `shipments_by_buyer_type_fips.parquet` | All retained buyer channels, with geographic matching results |
 | `cleaning_audit.json` | Cleaning exclusions and reconciliation checks |
 
-Cleaning also produces CSV files for unmatched locations, missing county-years, buyer types, drug-label disagreements, and large shipments requiring review. Use a cleaned output only when `cleaning_audit.json` reports `status: complete` and `validated: true`. Population normalization and mortality merging follow this step. Raw data and generated outputs are kept outside version control.
+Cleaning also produces CSV files for unmatched locations, missing county-years, buyer types, drug-label disagreements, and large shipments requiring review. Use a cleaned output only when `cleaning_audit.json` reports `status: complete` and `validated: true`. Population normalization and mortality merging follow this step. The shared cleaned outputs are tracked; raw data and intermediate runs stay outside version control.
 
 ## Tests
 
