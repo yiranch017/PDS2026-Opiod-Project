@@ -52,6 +52,26 @@ The cleaned tables and review files are in [outputs/shipments_clean_final](outpu
 
 Cleaning also produces CSV files for unmatched locations, missing county-years, buyer types, drug-label disagreements, and large shipments requiring review. Use a cleaned output only when `cleaning_audit.json` reports `status: complete` and `validated: true`. Population normalization and mortality merging follow this step. The shared cleaned outputs are tracked; raw data and intermediate runs stay outside version control.
 
+## Clean mortality
+
+From the repository root, run:
+
+```bash
+python src/clean_mortality.py --zip data/raw/US_VitalStatistics.zip --output outputs/mortality_clean
+```
+
+If the supplied ZIP is beside the repository, use `--zip "../US_VitalStatistics.zip"`.
+
+| File in `outputs/mortality_clean/` | Contents |
+| --- | --- |
+| `mortality_county_year.parquet` | County-year table for merging, with five-character text FIPS codes |
+| `mortality_county_year.csv` | CSV copy with blank cells for missing counts |
+| `mortality_audit.json` | Source exclusions and reporting coverage by state, year, and cause |
+
+The supplied ZIP produces 30,796 county-year rows for 2006–2015, excluding Alaska and territories. D1 represents unintentional drug overdose deaths. The per-cause status fields distinguish reported counts (`reported`), source rows marked missing (`explicit_missing`), and rows absent from the export (`not_in_export`). Both missing states keep the count null. The export cannot distinguish suppressed counts from zeros when a row is absent.
+
+Join the mortality and shipment tables on `county_fips` and `year`, checking that each key is unique on both sides. Join annual county population before computing rates. See the [mortality cleaning notes](docs/mortality_cleaning.md) for the outcome definitions and limitations.
+
 ## Tests
 
 ```bash
