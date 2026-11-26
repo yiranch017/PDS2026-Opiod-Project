@@ -6,4 +6,6 @@ data/raw/
 data/interim/
 outputs/*
 !outputs/shipments_clean_final/
+!outputs/population_clean/
+!outputs/county_panel/
 *.log

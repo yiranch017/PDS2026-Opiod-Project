@@ -1,0 +1,27 @@
+{
+  "status": "complete",
+  "validated": true,
+  "county_year_rows": 31130,
+  "counties": 3113,
+  "years": [
+    2006,
+    2015
+  ],
+  "shipment_records": 433563526,
+  "shipment_weight_g": 1315622828.843032,
+  "county_years_with_shipments": 30036,
+  "county_years_without_shipments": 1094,
+  "county_years_with_reported_unintentional_deaths": 6291,
+  "joint_primary_eligible_rows": 6291,
+  "counties_complete_joint_2006_2015": 341,
+  "flagged_drug_rows": 3645,
+  "boundary_not_comparable_rows": 30,
+  "obsolete_mortality_placeholder_rows": 1,
+  "input_sha256": {
+    "population_county_year.parquet": "cbb97a4390dbe044f807dda93879fd1dcf71994c2097783077719468586a005a",
+    "US_VitalStatistics.zip": "1154c225238e078e18f52c911385a4343b9ed53bc6e43b90543be961c32b6bc1",
+    "shipments_county_year.parquet": "c80ddaaab4f8fc61a35c3563edd38e9b5f94bb6e95b4e50ea23a197d1a86495b",
+    "shipments_county_year_drug.parquet": "55e8a083bb89d4ce37ea2e607edd9944e10453617fd265497b0208aa3ce704ea"
+  },
+  "note": "All population county-years retained. Primary mortality is reported unintentional drug overdose, not opioid-specific. Missing is not zero. Bedford, York, and Newport News are flagged for boundary changes and excluded from default eligibility. Their mortality rates are withheld. Bounds are for sensitivity, not imputed counts. No controls selected."
+}

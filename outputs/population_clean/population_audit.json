@@ -1,0 +1,2530 @@
+{
+  "status": "complete",
+  "validated": true,
+  "sources": [
+    {
+      "file": "co-est00int-tot.csv",
+      "url": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-tot.csv",
+      "sha256": "273e56203b61c2ccfb05a54c9b2b025b0521e3764b175469ca22bcad4b6ae8f6"
+    },
+    {
+      "file": "co-est2019-alldata.csv",
+      "url": "https://www2.census.gov/programs-surveys/popest/datasets/2010-2019/counties/totals/co-est2019-alldata.csv",
+      "sha256": "654032fbb805bc9a7c124ba04ad47e170f5d9dc9d4974a73edfc20598fde77d8"
+    }
+  ],
+  "county_year_rows": 31130,
+  "counties": 3113,
+  "years": [
+    2006,
+    2015
+  ],
+  "reference_date": "July 1",
+  "geography_crosswalk": {
+    "46113": "46102",
+    "51515": "51019"
+  },
+  "state_total_checks": [
+    {
+      "state_fips": "01",
+      "year": 2006,
+      "population": 4628981
+    },
+    {
+      "state_fips": "04",
+      "year": 2006,
+      "population": 6029141
+    },
+    {
+      "state_fips": "05",
+      "year": 2006,
+      "population": 2821761
+    },
+    {
+      "state_fips": "06",
+      "year": 2006,
+      "population": 36021202
+    },
+    {
+      "state_fips": "08",
+      "year": 2006,
+      "population": 4720423
+    },
+    {
+      "state_fips": "09",
+      "year": 2006,
+      "population": 3517460
+    },
+    {
+      "state_fips": "10",
+      "year": 2006,
+      "population": 859268
+    },
+    {
+      "state_fips": "11",
+      "year": 2006,
+      "population": 570681
+    },
+    {
+      "state_fips": "12",
+      "year": 2006,
+      "population": 18166990
+    },
+    {
+      "state_fips": "13",
+      "year": 2006,
+      "population": 9155813
+    },
+    {
+      "state_fips": "15",
+      "year": 2006,
+      "population": 1309731
+    },
+    {
+      "state_fips": "16",
+      "year": 2006,
+      "population": 1468669
+    },
+    {
+      "state_fips": "17",
+      "year": 2006,
+      "population": 12643955
+    },
+    {
+      "state_fips": "18",
+      "year": 2006,
+      "population": 6332669
+    },
+    {
+      "state_fips": "19",
+      "year": 2006,
+      "population": 2982644
+    },
+    {
+      "state_fips": "20",
+      "year": 2006,
+      "population": 2762931
+    },
+    {
+      "state_fips": "21",
+      "year": 2006,
+      "population": 4219239
+    },
+    {
+      "state_fips": "22",
+      "year": 2006,
+      "population": 4302665
+    },
+    {
+      "state_fips": "23",
+      "year": 2006,
+      "population": 1323619
+    },
+    {
+      "state_fips": "24",
+      "year": 2006,
+      "population": 5627367
+    },
+    {
+      "state_fips": "25",
+      "year": 2006,
+      "population": 6410084
+    },
+    {
+      "state_fips": "26",
+      "year": 2006,
+      "population": 10036081
+    },
+    {
+      "state_fips": "27",
+      "year": 2006,
+      "population": 5163555
+    },
+    {
+      "state_fips": "28",
+      "year": 2006,
+      "population": 2904978
+    },
+    {
+      "state_fips": "29",
+      "year": 2006,
+      "population": 5842704
+    },
+    {
+      "state_fips": "30",
+      "year": 2006,
+      "population": 952692
+    },
+    {
+      "state_fips": "31",
+      "year": 2006,
+      "population": 1772693
+    },
+    {
+      "state_fips": "32",
+      "year": 2006,
+      "population": 2522658
+    },
+    {
+      "state_fips": "33",
+      "year": 2006,
+      "population": 1308389
+    },
+    {
+      "state_fips": "34",
+      "year": 2006,
+      "population": 8661679
+    },
+    {
+      "state_fips": "35",
+      "year": 2006,
+      "population": 1962137
+    },
+    {
+      "state_fips": "36",
+      "year": 2006,
+      "population": 19104631
+    },
+    {
+      "state_fips": "37",
+      "year": 2006,
+      "population": 8917270
+    },
+    {
+      "state_fips": "38",
+      "year": 2006,
+      "population": 649422
+    },
+    {
+      "state_fips": "39",
+      "year": 2006,
+      "population": 11481213
+    },
+    {
+      "state_fips": "40",
+      "year": 2006,
+      "population": 3594090
+    },
+    {
+      "state_fips": "41",
+      "year": 2006,
+      "population": 3670883
+    },
+    {
+      "state_fips": "42",
+      "year": 2006,
+      "population": 12510809
+    },
+    {
+      "state_fips": "44",
+      "year": 2006,
+      "population": 1063096
+    },
+    {
+      "state_fips": "45",
+      "year": 2006,
+      "population": 4357847
+    },
+    {
+      "state_fips": "46",
+      "year": 2006,
+      "population": 783033
+    },
+    {
+      "state_fips": "47",
+      "year": 2006,
+      "population": 6088766
+    },
+    {
+      "state_fips": "48",
+      "year": 2006,
+      "population": 23359580
+    },
+    {
+      "state_fips": "49",
+      "year": 2006,
+      "population": 2525507
+    },
+    {
+      "state_fips": "50",
+      "year": 2006,
+      "population": 622892
+    },
+    {
+      "state_fips": "51",
+      "year": 2006,
+      "population": 7673725
+    },
+    {
+      "state_fips": "53",
+      "year": 2006,
+      "population": 6370753
+    },
+    {
+      "state_fips": "54",
+      "year": 2006,
+      "population": 1827912
+    },
+    {
+      "state_fips": "55",
+      "year": 2006,
+      "population": 5577655
+    },
+    {
+      "state_fips": "56",
+      "year": 2006,
+      "population": 522667
+    },
+    {
+      "state_fips": "01",
+      "year": 2007,
+      "population": 4672840
+    },
+    {
+      "state_fips": "04",
+      "year": 2007,
+      "population": 6167681
+    },
+    {
+      "state_fips": "05",
+      "year": 2007,
+      "population": 2848650
+    },
+    {
+      "state_fips": "06",
+      "year": 2007,
+      "population": 36250311
+    },
+    {
+      "state_fips": "08",
+      "year": 2007,
+      "population": 4803868
+    },
+    {
+      "state_fips": "09",
+      "year": 2007,
+      "population": 3527270
+    },
+    {
+      "state_fips": "10",
+      "year": 2007,
+      "population": 871749
+    },
+    {
+      "state_fips": "11",
+      "year": 2007,
+      "population": 574404
+    },
+    {
+      "state_fips": "12",
+      "year": 2007,
+      "population": 18367842
+    },
+    {
+      "state_fips": "13",
+      "year": 2007,
+      "population": 9349988
+    },
+    {
+      "state_fips": "15",
+      "year": 2007,
+      "population": 1315675
+    },
+    {
+      "state_fips": "16",
+      "year": 2007,
+      "population": 1505105
+    },
+    {
+      "state_fips": "17",
+      "year": 2007,
+      "population": 12695866
+    },
+    {
+      "state_fips": "18",
+      "year": 2007,
+      "population": 6379599
+    },
+    {
+      "state_fips": "19",
+      "year": 2007,
+      "population": 2999212
+    },
+    {
+      "state_fips": "20",
+      "year": 2007,
+      "population": 2783785
+    },
+    {
+      "state_fips": "21",
+      "year": 2007,
+      "population": 4256672
+    },
+    {
+      "state_fips": "22",
+      "year": 2007,
+      "population": 4375581
+    },
+    {
+      "state_fips": "23",
+      "year": 2007,
+      "population": 1327040
+    },
+    {
+      "state_fips": "24",
+      "year": 2007,
+      "population": 5653408
+    },
+    {
+      "state_fips": "25",
+      "year": 2007,
+      "population": 6431559
+    },
+    {
+      "state_fips": "26",
+      "year": 2007,
+      "population": 10001284
+    },
+    {
+      "state_fips": "27",
+      "year": 2007,
+      "population": 5207203
+    },
+    {
+      "state_fips": "28",
+      "year": 2007,
+      "population": 2928350
+    },
+    {
+      "state_fips": "29",
+      "year": 2007,
+      "population": 5887612
+    },
+    {
+      "state_fips": "30",
+      "year": 2007,
+      "population": 964706
+    },
+    {
+      "state_fips": "31",
+      "year": 2007,
+      "population": 1783440
+    },
+    {
+      "state_fips": "32",
+      "year": 2007,
+      "population": 2601072
+    },
+    {
+      "state_fips": "33",
+      "year": 2007,
+      "population": 1312540
+    },
+    {
+      "state_fips": "34",
+      "year": 2007,
+      "population": 8677885
+    },
+    {
+      "state_fips": "35",
+      "year": 2007,
+      "population": 1990070
+    },
+    {
+      "state_fips": "36",
+      "year": 2007,
+      "population": 19132335
+    },
+    {
+      "state_fips": "37",
+      "year": 2007,
+      "population": 9118037
+    },
+    {
+      "state_fips": "38",
+      "year": 2007,
+      "population": 652822
+    },
+    {
+      "state_fips": "39",
+      "year": 2007,
+      "population": 11500468
+    },
+    {
+      "state_fips": "40",
+      "year": 2007,
+      "population": 3634349
+    },
+    {
+      "state_fips": "41",
+      "year": 2007,
+      "population": 3722417
+    },
+    {
+      "state_fips": "42",
+      "year": 2007,
+      "population": 12563937
+    },
+    {
+      "state_fips": "44",
+      "year": 2007,
+      "population": 1057315
+    },
+    {
+      "state_fips": "45",
+      "year": 2007,
+      "population": 4444110
+    },
+    {
+      "state_fips": "46",
+      "year": 2007,
+      "population": 791623
+    },
+    {
+      "state_fips": "47",
+      "year": 2007,
+      "population": 6175727
+    },
+    {
+      "state_fips": "48",
+      "year": 2007,
+      "population": 23831983
+    },
+    {
+      "state_fips": "49",
+      "year": 2007,
+      "population": 2597746
+    },
+    {
+      "state_fips": "50",
+      "year": 2007,
+      "population": 623481
+    },
+    {
+      "state_fips": "51",
+      "year": 2007,
+      "population": 7751000
+    },
+    {
+      "state_fips": "53",
+      "year": 2007,
+      "population": 6461587
+    },
+    {
+      "state_fips": "54",
+      "year": 2007,
+      "population": 1834052
+    },
+    {
+      "state_fips": "55",
+      "year": 2007,
+      "population": 5610775
+    },
+    {
+      "state_fips": "56",
+      "year": 2007,
+      "population": 534876
+    },
+    {
+      "state_fips": "01",
+      "year": 2008,
+      "population": 4718206
+    },
+    {
+      "state_fips": "04",
+      "year": 2008,
+      "population": 6280362
+    },
+    {
+      "state_fips": "05",
+      "year": 2008,
+      "population": 2874554
+    },
+    {
+      "state_fips": "06",
+      "year": 2008,
+      "population": 36604337
+    },
+    {
+      "state_fips": "08",
+      "year": 2008,
+      "population": 4889730
+    },
+    {
+      "state_fips": "09",
+      "year": 2008,
+      "population": 3545579
+    },
+    {
+      "state_fips": "10",
+      "year": 2008,
+      "population": 883874
+    },
+    {
+      "state_fips": "11",
+      "year": 2008,
+      "population": 580236
+    },
+    {
+      "state_fips": "12",
+      "year": 2008,
+      "population": 18527305
+    },
+    {
+      "state_fips": "13",
+      "year": 2008,
+      "population": 9504843
+    },
+    {
+      "state_fips": "15",
+      "year": 2008,
+      "population": 1332213
+    },
+    {
+      "state_fips": "16",
+      "year": 2008,
+      "population": 1534320
+    },
+    {
+      "state_fips": "17",
+      "year": 2008,
+      "population": 12747038
+    },
+    {
+      "state_fips": "18",
+      "year": 2008,
+      "population": 6424806
+    },
+    {
+      "state_fips": "19",
+      "year": 2008,
+      "population": 3016734
+    },
+    {
+      "state_fips": "20",
+      "year": 2008,
+      "population": 2808076
+    },
+    {
+      "state_fips": "21",
+      "year": 2008,
+      "population": 4289878
+    },
+    {
+      "state_fips": "22",
+      "year": 2008,
+      "population": 4435586
+    },
+    {
+      "state_fips": "23",
+      "year": 2008,
+      "population": 1330509
+    },
+    {
+      "state_fips": "24",
+      "year": 2008,
+      "population": 5684965
+    },
+    {
+      "state_fips": "25",
+      "year": 2008,
+      "population": 6468967
+    },
+    {
+      "state_fips": "26",
+      "year": 2008,
+      "population": 9946889
+    },
+    {
+      "state_fips": "27",
+      "year": 2008,
+      "population": 5247018
+    },
+    {
+      "state_fips": "28",
+      "year": 2008,
+      "population": 2947806
+    },
+    {
+      "state_fips": "29",
+      "year": 2008,
+      "population": 5923916
+    },
+    {
+      "state_fips": "30",
+      "year": 2008,
+      "population": 976415
+    },
+    {
+      "state_fips": "31",
+      "year": 2008,
+      "population": 1796378
+    },
+    {
+      "state_fips": "32",
+      "year": 2008,
+      "population": 2653630
+    },
+    {
+      "state_fips": "33",
+      "year": 2008,
+      "population": 1315906
+    },
+    {
+      "state_fips": "34",
+      "year": 2008,
+      "population": 8711090
+    },
+    {
+      "state_fips": "35",
+      "year": 2008,
+      "population": 2010662
+    },
+    {
+      "state_fips": "36",
+      "year": 2008,
+      "population": 19212436
+    },
+    {
+      "state_fips": "37",
+      "year": 2008,
+      "population": 9309449
+    },
+    {
+      "state_fips": "38",
+      "year": 2008,
+      "population": 657569
+    },
+    {
+      "state_fips": "39",
+      "year": 2008,
+      "population": 11515391
+    },
+    {
+      "state_fips": "40",
+      "year": 2008,
+      "population": 3668976
+    },
+    {
+      "state_fips": "41",
+      "year": 2008,
+      "population": 3768748
+    },
+    {
+      "state_fips": "42",
+      "year": 2008,
+      "population": 12612285
+    },
+    {
+      "state_fips": "44",
+      "year": 2008,
+      "population": 1055003
+    },
+    {
+      "state_fips": "45",
+      "year": 2008,
+      "population": 4528996
+    },
+    {
+      "state_fips": "46",
+      "year": 2008,
+      "population": 799124
+    },
+    {
+      "state_fips": "47",
+      "year": 2008,
+      "population": 6247411
+    },
+    {
+      "state_fips": "48",
+      "year": 2008,
+      "population": 24309039
+    },
+    {
+      "state_fips": "49",
+      "year": 2008,
+      "population": 2663029
+    },
+    {
+      "state_fips": "50",
+      "year": 2008,
+      "population": 624151
+    },
+    {
+      "state_fips": "51",
+      "year": 2008,
+      "population": 7833496
+    },
+    {
+      "state_fips": "53",
+      "year": 2008,
+      "population": 6562231
+    },
+    {
+      "state_fips": "54",
+      "year": 2008,
+      "population": 1840310
+    },
+    {
+      "state_fips": "55",
+      "year": 2008,
+      "population": 5640996
+    },
+    {
+      "state_fips": "56",
+      "year": 2008,
+      "population": 546043
+    },
+    {
+      "state_fips": "01",
+      "year": 2009,
+      "population": 4757938
+    },
+    {
+      "state_fips": "04",
+      "year": 2009,
+      "population": 6343154
+    },
+    {
+      "state_fips": "05",
+      "year": 2009,
+      "population": 2896843
+    },
+    {
+      "state_fips": "06",
+      "year": 2009,
+      "population": 36961229
+    },
+    {
+      "state_fips": "08",
+      "year": 2009,
+      "population": 4972195
+    },
+    {
+      "state_fips": "09",
+      "year": 2009,
+      "population": 3561807
+    },
+    {
+      "state_fips": "10",
+      "year": 2009,
+      "population": 891730
+    },
+    {
+      "state_fips": "11",
+      "year": 2009,
+      "population": 592228
+    },
+    {
+      "state_fips": "12",
+      "year": 2009,
+      "population": 18652644
+    },
+    {
+      "state_fips": "13",
+      "year": 2009,
+      "population": 9620846
+    },
+    {
+      "state_fips": "15",
+      "year": 2009,
+      "population": 1346717
+    },
+    {
+      "state_fips": "16",
+      "year": 2009,
+      "population": 1554439
+    },
+    {
+      "state_fips": "17",
+      "year": 2009,
+      "population": 12796778
+    },
+    {
+      "state_fips": "18",
+      "year": 2009,
+      "population": 6459325
+    },
+    {
+      "state_fips": "19",
+      "year": 2009,
+      "population": 3032870
+    },
+    {
+      "state_fips": "20",
+      "year": 2009,
+      "population": 2832704
+    },
+    {
+      "state_fips": "21",
+      "year": 2009,
+      "population": 4317074
+    },
+    {
+      "state_fips": "22",
+      "year": 2009,
+      "population": 4491648
+    },
+    {
+      "state_fips": "23",
+      "year": 2009,
+      "population": 1329590
+    },
+    {
+      "state_fips": "24",
+      "year": 2009,
+      "population": 5730388
+    },
+    {
+      "state_fips": "25",
+      "year": 2009,
+      "population": 6517613
+    },
+    {
+      "state_fips": "26",
+      "year": 2009,
+      "population": 9901591
+    },
+    {
+      "state_fips": "27",
+      "year": 2009,
+      "population": 5281203
+    },
+    {
+      "state_fips": "28",
+      "year": 2009,
+      "population": 2958774
+    },
+    {
+      "state_fips": "29",
+      "year": 2009,
+      "population": 5961088
+    },
+    {
+      "state_fips": "30",
+      "year": 2009,
+      "population": 983982
+    },
+    {
+      "state_fips": "31",
+      "year": 2009,
+      "population": 1812683
+    },
+    {
+      "state_fips": "32",
+      "year": 2009,
+      "population": 2684665
+    },
+    {
+      "state_fips": "33",
+      "year": 2009,
+      "population": 1316102
+    },
+    {
+      "state_fips": "34",
+      "year": 2009,
+      "population": 8755602
+    },
+    {
+      "state_fips": "35",
+      "year": 2009,
+      "population": 2036802
+    },
+    {
+      "state_fips": "36",
+      "year": 2009,
+      "population": 19307066
+    },
+    {
+      "state_fips": "37",
+      "year": 2009,
+      "population": 9449566
+    },
+    {
+      "state_fips": "38",
+      "year": 2009,
+      "population": 664968
+    },
+    {
+      "state_fips": "39",
+      "year": 2009,
+      "population": 11528896
+    },
+    {
+      "state_fips": "40",
+      "year": 2009,
+      "population": 3717572
+    },
+    {
+      "state_fips": "41",
+      "year": 2009,
+      "population": 3808600
+    },
+    {
+      "state_fips": "42",
+      "year": 2009,
+      "population": 12666858
+    },
+    {
+      "state_fips": "44",
+      "year": 2009,
+      "population": 1053646
+    },
+    {
+      "state_fips": "45",
+      "year": 2009,
+      "population": 4589872
+    },
+    {
+      "state_fips": "46",
+      "year": 2009,
+      "population": 807067
+    },
+    {
+      "state_fips": "47",
+      "year": 2009,
+      "population": 6306019
+    },
+    {
+      "state_fips": "48",
+      "year": 2009,
+      "population": 24801761
+    },
+    {
+      "state_fips": "49",
+      "year": 2009,
+      "population": 2723421
+    },
+    {
+      "state_fips": "50",
+      "year": 2009,
+      "population": 624817
+    },
+    {
+      "state_fips": "51",
+      "year": 2009,
+      "population": 7925937
+    },
+    {
+      "state_fips": "53",
+      "year": 2009,
+      "population": 6667426
+    },
+    {
+      "state_fips": "54",
+      "year": 2009,
+      "population": 1847775
+    },
+    {
+      "state_fips": "55",
+      "year": 2009,
+      "population": 5669264
+    },
+    {
+      "state_fips": "56",
+      "year": 2009,
+      "population": 559851
+    },
+    {
+      "state_fips": "01",
+      "year": 2010,
+      "population": 4785437
+    },
+    {
+      "state_fips": "04",
+      "year": 2010,
+      "population": 6407172
+    },
+    {
+      "state_fips": "05",
+      "year": 2010,
+      "population": 2921964
+    },
+    {
+      "state_fips": "06",
+      "year": 2010,
+      "population": 37319502
+    },
+    {
+      "state_fips": "08",
+      "year": 2010,
+      "population": 5047349
+    },
+    {
+      "state_fips": "09",
+      "year": 2010,
+      "population": 3579114
+    },
+    {
+      "state_fips": "10",
+      "year": 2010,
+      "population": 899593
+    },
+    {
+      "state_fips": "11",
+      "year": 2010,
+      "population": 605226
+    },
+    {
+      "state_fips": "12",
+      "year": 2010,
+      "population": 18845537
+    },
+    {
+      "state_fips": "13",
+      "year": 2010,
+      "population": 9711881
+    },
+    {
+      "state_fips": "15",
+      "year": 2010,
+      "population": 1363963
+    },
+    {
+      "state_fips": "16",
+      "year": 2010,
+      "population": 1570746
+    },
+    {
+      "state_fips": "17",
+      "year": 2010,
+      "population": 12840503
+    },
+    {
+      "state_fips": "18",
+      "year": 2010,
+      "population": 6490432
+    },
+    {
+      "state_fips": "19",
+      "year": 2010,
+      "population": 3050745
+    },
+    {
+      "state_fips": "20",
+      "year": 2010,
+      "population": 2858190
+    },
+    {
+      "state_fips": "21",
+      "year": 2010,
+      "population": 4348181
+    },
+    {
+      "state_fips": "22",
+      "year": 2010,
+      "population": 4544532
+    },
+    {
+      "state_fips": "23",
+      "year": 2010,
+      "population": 1327629
+    },
+    {
+      "state_fips": "24",
+      "year": 2010,
+      "population": 5788645
+    },
+    {
+      "state_fips": "25",
+      "year": 2010,
+      "population": 6566307
+    },
+    {
+      "state_fips": "26",
+      "year": 2010,
+      "population": 9877510
+    },
+    {
+      "state_fips": "27",
+      "year": 2010,
+      "population": 5310828
+    },
+    {
+      "state_fips": "28",
+      "year": 2010,
+      "population": 2970548
+    },
+    {
+      "state_fips": "29",
+      "year": 2010,
+      "population": 5995974
+    },
+    {
+      "state_fips": "30",
+      "year": 2010,
+      "population": 990697
+    },
+    {
+      "state_fips": "31",
+      "year": 2010,
+      "population": 1829542
+    },
+    {
+      "state_fips": "32",
+      "year": 2010,
+      "population": 2702405
+    },
+    {
+      "state_fips": "33",
+      "year": 2010,
+      "population": 1316762
+    },
+    {
+      "state_fips": "34",
+      "year": 2010,
+      "population": 8799446
+    },
+    {
+      "state_fips": "35",
+      "year": 2010,
+      "population": 2064552
+    },
+    {
+      "state_fips": "36",
+      "year": 2010,
+      "population": 19399878
+    },
+    {
+      "state_fips": "37",
+      "year": 2010,
+      "population": 9574323
+    },
+    {
+      "state_fips": "38",
+      "year": 2010,
+      "population": 674715
+    },
+    {
+      "state_fips": "39",
+      "year": 2010,
+      "population": 11539336
+    },
+    {
+      "state_fips": "40",
+      "year": 2010,
+      "population": 3759944
+    },
+    {
+      "state_fips": "41",
+      "year": 2010,
+      "population": 3837491
+    },
+    {
+      "state_fips": "42",
+      "year": 2010,
+      "population": 12711160
+    },
+    {
+      "state_fips": "44",
+      "year": 2010,
+      "population": 1053959
+    },
+    {
+      "state_fips": "45",
+      "year": 2010,
+      "population": 4635649
+    },
+    {
+      "state_fips": "46",
+      "year": 2010,
+      "population": 816166
+    },
+    {
+      "state_fips": "47",
+      "year": 2010,
+      "population": 6355311
+    },
+    {
+      "state_fips": "48",
+      "year": 2010,
+      "population": 25241971
+    },
+    {
+      "state_fips": "49",
+      "year": 2010,
+      "population": 2775332
+    },
+    {
+      "state_fips": "50",
+      "year": 2010,
+      "population": 625879
+    },
+    {
+      "state_fips": "51",
+      "year": 2010,
+      "population": 8023699
+    },
+    {
+      "state_fips": "53",
+      "year": 2010,
+      "population": 6742830
+    },
+    {
+      "state_fips": "54",
+      "year": 2010,
+      "population": 1854239
+    },
+    {
+      "state_fips": "55",
+      "year": 2010,
+      "population": 5690475
+    },
+    {
+      "state_fips": "56",
+      "year": 2010,
+      "population": 564487
+    },
+    {
+      "state_fips": "01",
+      "year": 2011,
+      "population": 4799069
+    },
+    {
+      "state_fips": "04",
+      "year": 2011,
+      "population": 6472643
+    },
+    {
+      "state_fips": "05",
+      "year": 2011,
+      "population": 2940667
+    },
+    {
+      "state_fips": "06",
+      "year": 2011,
+      "population": 37638369
+    },
+    {
+      "state_fips": "08",
+      "year": 2011,
+      "population": 5121108
+    },
+    {
+      "state_fips": "09",
+      "year": 2011,
+      "population": 3588283
+    },
+    {
+      "state_fips": "10",
+      "year": 2011,
+      "population": 907381
+    },
+    {
+      "state_fips": "11",
+      "year": 2011,
+      "population": 619800
+    },
+    {
+      "state_fips": "12",
+      "year": 2011,
+      "population": 19053237
+    },
+    {
+      "state_fips": "13",
+      "year": 2011,
+      "population": 9802431
+    },
+    {
+      "state_fips": "15",
+      "year": 2011,
+      "population": 1379329
+    },
+    {
+      "state_fips": "16",
+      "year": 2011,
+      "population": 1583910
+    },
+    {
+      "state_fips": "17",
+      "year": 2011,
+      "population": 12867454
+    },
+    {
+      "state_fips": "18",
+      "year": 2011,
+      "population": 6516528
+    },
+    {
+      "state_fips": "19",
+      "year": 2011,
+      "population": 3066336
+    },
+    {
+      "state_fips": "20",
+      "year": 2011,
+      "population": 2869225
+    },
+    {
+      "state_fips": "21",
+      "year": 2011,
+      "population": 4369821
+    },
+    {
+      "state_fips": "22",
+      "year": 2011,
+      "population": 4575625
+    },
+    {
+      "state_fips": "23",
+      "year": 2011,
+      "population": 1328284
+    },
+    {
+      "state_fips": "24",
+      "year": 2011,
+      "population": 5839419
+    },
+    {
+      "state_fips": "25",
+      "year": 2011,
+      "population": 6613583
+    },
+    {
+      "state_fips": "26",
+      "year": 2011,
+      "population": 9882412
+    },
+    {
+      "state_fips": "27",
+      "year": 2011,
+      "population": 5346143
+    },
+    {
+      "state_fips": "28",
+      "year": 2011,
+      "population": 2978731
+    },
+    {
+      "state_fips": "29",
+      "year": 2011,
+      "population": 6010275
+    },
+    {
+      "state_fips": "30",
+      "year": 2011,
+      "population": 997316
+    },
+    {
+      "state_fips": "31",
+      "year": 2011,
+      "population": 1840672
+    },
+    {
+      "state_fips": "32",
+      "year": 2011,
+      "population": 2712730
+    },
+    {
+      "state_fips": "33",
+      "year": 2011,
+      "population": 1320202
+    },
+    {
+      "state_fips": "34",
+      "year": 2011,
+      "population": 8828117
+    },
+    {
+      "state_fips": "35",
+      "year": 2011,
+      "population": 2080450
+    },
+    {
+      "state_fips": "36",
+      "year": 2011,
+      "population": 19499241
+    },
+    {
+      "state_fips": "37",
+      "year": 2011,
+      "population": 9657592
+    },
+    {
+      "state_fips": "38",
+      "year": 2011,
+      "population": 685225
+    },
+    {
+      "state_fips": "39",
+      "year": 2011,
+      "population": 11544663
+    },
+    {
+      "state_fips": "40",
+      "year": 2011,
+      "population": 3788379
+    },
+    {
+      "state_fips": "41",
+      "year": 2011,
+      "population": 3872036
+    },
+    {
+      "state_fips": "42",
+      "year": 2011,
+      "population": 12745815
+    },
+    {
+      "state_fips": "44",
+      "year": 2011,
+      "population": 1053649
+    },
+    {
+      "state_fips": "45",
+      "year": 2011,
+      "population": 4671994
+    },
+    {
+      "state_fips": "46",
+      "year": 2011,
+      "population": 823579
+    },
+    {
+      "state_fips": "47",
+      "year": 2011,
+      "population": 6399291
+    },
+    {
+      "state_fips": "48",
+      "year": 2011,
+      "population": 25645629
+    },
+    {
+      "state_fips": "49",
+      "year": 2011,
+      "population": 2814384
+    },
+    {
+      "state_fips": "50",
+      "year": 2011,
+      "population": 627049
+    },
+    {
+      "state_fips": "51",
+      "year": 2011,
+      "population": 8101155
+    },
+    {
+      "state_fips": "53",
+      "year": 2011,
+      "population": 6826627
+    },
+    {
+      "state_fips": "54",
+      "year": 2011,
+      "population": 1856301
+    },
+    {
+      "state_fips": "55",
+      "year": 2011,
+      "population": 5705288
+    },
+    {
+      "state_fips": "56",
+      "year": 2011,
+      "population": 567299
+    },
+    {
+      "state_fips": "01",
+      "year": 2012,
+      "population": 4815588
+    },
+    {
+      "state_fips": "04",
+      "year": 2012,
+      "population": 6554978
+    },
+    {
+      "state_fips": "05",
+      "year": 2012,
+      "population": 2952164
+    },
+    {
+      "state_fips": "06",
+      "year": 2012,
+      "population": 37948800
+    },
+    {
+      "state_fips": "08",
+      "year": 2012,
+      "population": 5192647
+    },
+    {
+      "state_fips": "09",
+      "year": 2012,
+      "population": 3594547
+    },
+    {
+      "state_fips": "10",
+      "year": 2012,
+      "population": 915179
+    },
+    {
+      "state_fips": "11",
+      "year": 2012,
+      "population": 634924
+    },
+    {
+      "state_fips": "12",
+      "year": 2012,
+      "population": 19297822
+    },
+    {
+      "state_fips": "13",
+      "year": 2012,
+      "population": 9901430
+    },
+    {
+      "state_fips": "15",
+      "year": 2012,
+      "population": 1394804
+    },
+    {
+      "state_fips": "16",
+      "year": 2012,
+      "population": 1595324
+    },
+    {
+      "state_fips": "17",
+      "year": 2012,
+      "population": 12882510
+    },
+    {
+      "state_fips": "18",
+      "year": 2012,
+      "population": 6537703
+    },
+    {
+      "state_fips": "19",
+      "year": 2012,
+      "population": 3076190
+    },
+    {
+      "state_fips": "20",
+      "year": 2012,
+      "population": 2885257
+    },
+    {
+      "state_fips": "21",
+      "year": 2012,
+      "population": 4386346
+    },
+    {
+      "state_fips": "22",
+      "year": 2012,
+      "population": 4600972
+    },
+    {
+      "state_fips": "23",
+      "year": 2012,
+      "population": 1327729
+    },
+    {
+      "state_fips": "24",
+      "year": 2012,
+      "population": 5886992
+    },
+    {
+      "state_fips": "25",
+      "year": 2012,
+      "population": 6663005
+    },
+    {
+      "state_fips": "26",
+      "year": 2012,
+      "population": 9897145
+    },
+    {
+      "state_fips": "27",
+      "year": 2012,
+      "population": 5376643
+    },
+    {
+      "state_fips": "28",
+      "year": 2012,
+      "population": 2983816
+    },
+    {
+      "state_fips": "29",
+      "year": 2012,
+      "population": 6024367
+    },
+    {
+      "state_fips": "30",
+      "year": 2012,
+      "population": 1003783
+    },
+    {
+      "state_fips": "31",
+      "year": 2012,
+      "population": 1853303
+    },
+    {
+      "state_fips": "32",
+      "year": 2012,
+      "population": 2743996
+    },
+    {
+      "state_fips": "33",
+      "year": 2012,
+      "population": 1324232
+    },
+    {
+      "state_fips": "34",
+      "year": 2012,
+      "population": 8844942
+    },
+    {
+      "state_fips": "35",
+      "year": 2012,
+      "population": 2087309
+    },
+    {
+      "state_fips": "36",
+      "year": 2012,
+      "population": 19572932
+    },
+    {
+      "state_fips": "37",
+      "year": 2012,
+      "population": 9749476
+    },
+    {
+      "state_fips": "38",
+      "year": 2012,
+      "population": 701176
+    },
+    {
+      "state_fips": "39",
+      "year": 2012,
+      "population": 11548923
+    },
+    {
+      "state_fips": "40",
+      "year": 2012,
+      "population": 3818814
+    },
+    {
+      "state_fips": "41",
+      "year": 2012,
+      "population": 3899001
+    },
+    {
+      "state_fips": "42",
+      "year": 2012,
+      "population": 12767118
+    },
+    {
+      "state_fips": "44",
+      "year": 2012,
+      "population": 1054621
+    },
+    {
+      "state_fips": "45",
+      "year": 2012,
+      "population": 4717354
+    },
+    {
+      "state_fips": "46",
+      "year": 2012,
+      "population": 833566
+    },
+    {
+      "state_fips": "47",
+      "year": 2012,
+      "population": 6453898
+    },
+    {
+      "state_fips": "48",
+      "year": 2012,
+      "population": 26084481
+    },
+    {
+      "state_fips": "49",
+      "year": 2012,
+      "population": 2853375
+    },
+    {
+      "state_fips": "50",
+      "year": 2012,
+      "population": 626090
+    },
+    {
+      "state_fips": "51",
+      "year": 2012,
+      "population": 8185080
+    },
+    {
+      "state_fips": "53",
+      "year": 2012,
+      "population": 6897058
+    },
+    {
+      "state_fips": "54",
+      "year": 2012,
+      "population": 1856872
+    },
+    {
+      "state_fips": "55",
+      "year": 2012,
+      "population": 5719960
+    },
+    {
+      "state_fips": "56",
+      "year": 2012,
+      "population": 576305
+    },
+    {
+      "state_fips": "01",
+      "year": 2013,
+      "population": 4830081
+    },
+    {
+      "state_fips": "04",
+      "year": 2013,
+      "population": 6632764
+    },
+    {
+      "state_fips": "05",
+      "year": 2013,
+      "population": 2959400
+    },
+    {
+      "state_fips": "06",
+      "year": 2013,
+      "population": 38260787
+    },
+    {
+      "state_fips": "08",
+      "year": 2013,
+      "population": 5269035
+    },
+    {
+      "state_fips": "09",
+      "year": 2013,
+      "population": 3594841
+    },
+    {
+      "state_fips": "10",
+      "year": 2013,
+      "population": 923576
+    },
+    {
+      "state_fips": "11",
+      "year": 2013,
+      "population": 650581
+    },
+    {
+      "state_fips": "12",
+      "year": 2013,
+      "population": 19545621
+    },
+    {
+      "state_fips": "13",
+      "year": 2013,
+      "population": 9972479
+    },
+    {
+      "state_fips": "15",
+      "year": 2013,
+      "population": 1408243
+    },
+    {
+      "state_fips": "16",
+      "year": 2013,
+      "population": 1611206
+    },
+    {
+      "state_fips": "17",
+      "year": 2013,
+      "population": 12895129
+    },
+    {
+      "state_fips": "18",
+      "year": 2013,
+      "population": 6568713
+    },
+    {
+      "state_fips": "19",
+      "year": 2013,
+      "population": 3092997
+    },
+    {
+      "state_fips": "20",
+      "year": 2013,
+      "population": 2893212
+    },
+    {
+      "state_fips": "21",
+      "year": 2013,
+      "population": 4404659
+    },
+    {
+      "state_fips": "22",
+      "year": 2013,
+      "population": 4624527
+    },
+    {
+      "state_fips": "23",
+      "year": 2013,
+      "population": 1328009
+    },
+    {
+      "state_fips": "24",
+      "year": 2013,
+      "population": 5923188
+    },
+    {
+      "state_fips": "25",
+      "year": 2013,
+      "population": 6713315
+    },
+    {
+      "state_fips": "26",
+      "year": 2013,
+      "population": 9913065
+    },
+    {
+      "state_fips": "27",
+      "year": 2013,
+      "population": 5413479
+    },
+    {
+      "state_fips": "28",
+      "year": 2013,
+      "population": 2988711
+    },
+    {
+      "state_fips": "29",
+      "year": 2013,
+      "population": 6040715
+    },
+    {
+      "state_fips": "30",
+      "year": 2013,
+      "population": 1013569
+    },
+    {
+      "state_fips": "31",
+      "year": 2013,
+      "population": 1865279
+    },
+    {
+      "state_fips": "32",
+      "year": 2013,
+      "population": 2775970
+    },
+    {
+      "state_fips": "33",
+      "year": 2013,
+      "population": 1326622
+    },
+    {
+      "state_fips": "34",
+      "year": 2013,
+      "population": 8856972
+    },
+    {
+      "state_fips": "35",
+      "year": 2013,
+      "population": 2092273
+    },
+    {
+      "state_fips": "36",
+      "year": 2013,
+      "population": 19624447
+    },
+    {
+      "state_fips": "37",
+      "year": 2013,
+      "population": 9843336
+    },
+    {
+      "state_fips": "38",
+      "year": 2013,
+      "population": 722036
+    },
+    {
+      "state_fips": "39",
+      "year": 2013,
+      "population": 11576684
+    },
+    {
+      "state_fips": "40",
+      "year": 2013,
+      "population": 3853214
+    },
+    {
+      "state_fips": "41",
+      "year": 2013,
+      "population": 3922468
+    },
+    {
+      "state_fips": "42",
+      "year": 2013,
+      "population": 12776309
+    },
+    {
+      "state_fips": "44",
+      "year": 2013,
+      "population": 1055081
+    },
+    {
+      "state_fips": "45",
+      "year": 2013,
+      "population": 4764080
+    },
+    {
+      "state_fips": "46",
+      "year": 2013,
+      "population": 842316
+    },
+    {
+      "state_fips": "47",
+      "year": 2013,
+      "population": 6494340
+    },
+    {
+      "state_fips": "48",
+      "year": 2013,
+      "population": 26480266
+    },
+    {
+      "state_fips": "49",
+      "year": 2013,
+      "population": 2897640
+    },
+    {
+      "state_fips": "50",
+      "year": 2013,
+      "population": 626210
+    },
+    {
+      "state_fips": "51",
+      "year": 2013,
+      "population": 8252427
+    },
+    {
+      "state_fips": "53",
+      "year": 2013,
+      "population": 6963985
+    },
+    {
+      "state_fips": "54",
+      "year": 2013,
+      "population": 1853914
+    },
+    {
+      "state_fips": "55",
+      "year": 2013,
+      "population": 5736754
+    },
+    {
+      "state_fips": "56",
+      "year": 2013,
+      "population": 582122
+    },
+    {
+      "state_fips": "01",
+      "year": 2014,
+      "population": 4841799
+    },
+    {
+      "state_fips": "04",
+      "year": 2014,
+      "population": 6730413
+    },
+    {
+      "state_fips": "05",
+      "year": 2014,
+      "population": 2967392
+    },
+    {
+      "state_fips": "06",
+      "year": 2014,
+      "population": 38596972
+    },
+    {
+      "state_fips": "08",
+      "year": 2014,
+      "population": 5350101
+    },
+    {
+      "state_fips": "09",
+      "year": 2014,
+      "population": 3594524
+    },
+    {
+      "state_fips": "10",
+      "year": 2014,
+      "population": 932487
+    },
+    {
+      "state_fips": "11",
+      "year": 2014,
+      "population": 662328
+    },
+    {
+      "state_fips": "12",
+      "year": 2014,
+      "population": 19845911
+    },
+    {
+      "state_fips": "13",
+      "year": 2014,
+      "population": 10067278
+    },
+    {
+      "state_fips": "15",
+      "year": 2014,
+      "population": 1414538
+    },
+    {
+      "state_fips": "16",
+      "year": 2014,
+      "population": 1631112
+    },
+    {
+      "state_fips": "17",
+      "year": 2014,
+      "population": 12884493
+    },
+    {
+      "state_fips": "18",
+      "year": 2014,
+      "population": 6593644
+    },
+    {
+      "state_fips": "19",
+      "year": 2014,
+      "population": 3109350
+    },
+    {
+      "state_fips": "20",
+      "year": 2014,
+      "population": 2900475
+    },
+    {
+      "state_fips": "21",
+      "year": 2014,
+      "population": 4414349
+    },
+    {
+      "state_fips": "22",
+      "year": 2014,
+      "population": 4644013
+    },
+    {
+      "state_fips": "23",
+      "year": 2014,
+      "population": 1330513
+    },
+    {
+      "state_fips": "24",
+      "year": 2014,
+      "population": 5957283
+    },
+    {
+      "state_fips": "25",
+      "year": 2014,
+      "population": 6762596
+    },
+    {
+      "state_fips": "26",
+      "year": 2014,
+      "population": 9929848
+    },
+    {
+      "state_fips": "27",
+      "year": 2014,
+      "population": 5451079
+    },
+    {
+      "state_fips": "28",
+      "year": 2014,
+      "population": 2990468
+    },
+    {
+      "state_fips": "29",
+      "year": 2014,
+      "population": 6056202
+    },
+    {
+      "state_fips": "30",
+      "year": 2014,
+      "population": 1021869
+    },
+    {
+      "state_fips": "31",
+      "year": 2014,
+      "population": 1879321
+    },
+    {
+      "state_fips": "32",
+      "year": 2014,
+      "population": 2817628
+    },
+    {
+      "state_fips": "33",
+      "year": 2014,
+      "population": 1333341
+    },
+    {
+      "state_fips": "34",
+      "year": 2014,
+      "population": 8864525
+    },
+    {
+      "state_fips": "35",
+      "year": 2014,
+      "population": 2089568
+    },
+    {
+      "state_fips": "36",
+      "year": 2014,
+      "population": 19651049
+    },
+    {
+      "state_fips": "37",
+      "year": 2014,
+      "population": 9932887
+    },
+    {
+      "state_fips": "38",
+      "year": 2014,
+      "population": 737401
+    },
+    {
+      "state_fips": "39",
+      "year": 2014,
+      "population": 11602700
+    },
+    {
+      "state_fips": "40",
+      "year": 2014,
+      "population": 3878187
+    },
+    {
+      "state_fips": "41",
+      "year": 2014,
+      "population": 3963244
+    },
+    {
+      "state_fips": "42",
+      "year": 2014,
+      "population": 12788313
+    },
+    {
+      "state_fips": "44",
+      "year": 2014,
+      "population": 1055936
+    },
+    {
+      "state_fips": "45",
+      "year": 2014,
+      "population": 4823617
+    },
+    {
+      "state_fips": "46",
+      "year": 2014,
+      "population": 849129
+    },
+    {
+      "state_fips": "47",
+      "year": 2014,
+      "population": 6541223
+    },
+    {
+      "state_fips": "48",
+      "year": 2014,
+      "population": 26964333
+    },
+    {
+      "state_fips": "49",
+      "year": 2014,
+      "population": 2936879
+    },
+    {
+      "state_fips": "50",
+      "year": 2014,
+      "population": 625214
+    },
+    {
+      "state_fips": "51",
+      "year": 2014,
+      "population": 8310993
+    },
+    {
+      "state_fips": "53",
+      "year": 2014,
+      "population": 7054655
+    },
+    {
+      "state_fips": "54",
+      "year": 2014,
+      "population": 1849489
+    },
+    {
+      "state_fips": "55",
+      "year": 2014,
+      "population": 5751525
+    },
+    {
+      "state_fips": "56",
+      "year": 2014,
+      "population": 582531
+    },
+    {
+      "state_fips": "01",
+      "year": 2015,
+      "population": 4852347
+    },
+    {
+      "state_fips": "04",
+      "year": 2015,
+      "population": 6829676
+    },
+    {
+      "state_fips": "05",
+      "year": 2015,
+      "population": 2978048
+    },
+    {
+      "state_fips": "06",
+      "year": 2015,
+      "population": 38918045
+    },
+    {
+      "state_fips": "08",
+      "year": 2015,
+      "population": 5450623
+    },
+    {
+      "state_fips": "09",
+      "year": 2015,
+      "population": 3587122
+    },
+    {
+      "state_fips": "10",
+      "year": 2015,
+      "population": 941252
+    },
+    {
+      "state_fips": "11",
+      "year": 2015,
+      "population": 675400
+    },
+    {
+      "state_fips": "12",
+      "year": 2015,
+      "population": 20209042
+    },
+    {
+      "state_fips": "13",
+      "year": 2015,
+      "population": 10178447
+    },
+    {
+      "state_fips": "15",
+      "year": 2015,
+      "population": 1422052
+    },
+    {
+      "state_fips": "16",
+      "year": 2015,
+      "population": 1651059
+    },
+    {
+      "state_fips": "17",
+      "year": 2015,
+      "population": 12858913
+    },
+    {
+      "state_fips": "18",
+      "year": 2015,
+      "population": 6608422
+    },
+    {
+      "state_fips": "19",
+      "year": 2015,
+      "population": 3120960
+    },
+    {
+      "state_fips": "20",
+      "year": 2015,
+      "population": 2909011
+    },
+    {
+      "state_fips": "21",
+      "year": 2015,
+      "population": 4425976
+    },
+    {
+      "state_fips": "22",
+      "year": 2015,
+      "population": 4664628
+    },
+    {
+      "state_fips": "23",
+      "year": 2015,
+      "population": 1328262
+    },
+    {
+      "state_fips": "24",
+      "year": 2015,
+      "population": 5985562
+    },
+    {
+      "state_fips": "25",
+      "year": 2015,
+      "population": 6794228
+    },
+    {
+      "state_fips": "26",
+      "year": 2015,
+      "population": 9931715
+    },
+    {
+      "state_fips": "27",
+      "year": 2015,
+      "population": 5482032
+    },
+    {
+      "state_fips": "28",
+      "year": 2015,
+      "population": 2988471
+    },
+    {
+      "state_fips": "29",
+      "year": 2015,
+      "population": 6071732
+    },
+    {
+      "state_fips": "30",
+      "year": 2015,
+      "population": 1030475
+    },
+    {
+      "state_fips": "31",
+      "year": 2015,
+      "population": 1891277
+    },
+    {
+      "state_fips": "32",
+      "year": 2015,
+      "population": 2866939
+    },
+    {
+      "state_fips": "33",
+      "year": 2015,
+      "population": 1336350
+    },
+    {
+      "state_fips": "34",
+      "year": 2015,
+      "population": 8867949
+    },
+    {
+      "state_fips": "35",
+      "year": 2015,
+      "population": 2089291
+    },
+    {
+      "state_fips": "36",
+      "year": 2015,
+      "population": 19654666
+    },
+    {
+      "state_fips": "37",
+      "year": 2015,
+      "population": 10031646
+    },
+    {
+      "state_fips": "38",
+      "year": 2015,
+      "population": 754066
+    },
+    {
+      "state_fips": "39",
+      "year": 2015,
+      "population": 11617527
+    },
+    {
+      "state_fips": "40",
+      "year": 2015,
+      "population": 3909500
+    },
+    {
+      "state_fips": "41",
+      "year": 2015,
+      "population": 4015792
+    },
+    {
+      "state_fips": "42",
+      "year": 2015,
+      "population": 12784826
+    },
+    {
+      "state_fips": "44",
+      "year": 2015,
+      "population": 1056065
+    },
+    {
+      "state_fips": "45",
+      "year": 2015,
+      "population": 4891938
+    },
+    {
+      "state_fips": "46",
+      "year": 2015,
+      "population": 853988
+    },
+    {
+      "state_fips": "47",
+      "year": 2015,
+      "population": 6591170
+    },
+    {
+      "state_fips": "48",
+      "year": 2015,
+      "population": 27470056
+    },
+    {
+      "state_fips": "49",
+      "year": 2015,
+      "population": 2981835
+    },
+    {
+      "state_fips": "50",
+      "year": 2015,
+      "population": 625216
+    },
+    {
+      "state_fips": "51",
+      "year": 2015,
+      "population": 8361808
+    },
+    {
+      "state_fips": "53",
+      "year": 2015,
+      "population": 7163657
+    },
+    {
+      "state_fips": "54",
+      "year": 2015,
+      "population": 1842050
+    },
+    {
+      "state_fips": "55",
+      "year": 2015,
+      "population": 5760940
+    },
+    {
+      "state_fips": "56",
+      "year": 2015,
+      "population": 585613
+    }
+  ],
+  "note": "Annual estimates; Bedford city is combined with Bedford County in 2006\u20132009. Later estimates already include it. Shannon is renamed to Oglala Lakota."
+}

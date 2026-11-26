@@ -15,3 +15,11 @@ The input is the provided CDC WONDER Underlying Cause of Death ZIP. This step ke
 The provided files contain cause categories, not the substances involved. They cannot identify opioid-specific, prescription-specific, heroin, or fentanyl deaths. The proposal's opioid-specific extension requires another dataset and a separate definition. County overdose rates per 100,000 require annual county population and are calculated after that dataset is joined.
 
 For later integration, validate one-to-one keys on both sides and merge on `county_fips` and `year`. Keep mortality nulls and inspect unmatched geography. The cleaned shipments table in `outputs/shipments_clean_final/shipments_county_year.parquet` uses the same keys. This step does not choose controls or create treatment indicators.
+
+## Joined data
+
+- This source cleaning is now used by `src/build_county_panel.py`. The source table is preserved in `outputs/county_panel/mortality_source_county_year.parquet`; start with `outputs/county_panel/county_year.parquet` for analysis with shipments and annual population.
+- The joined table covers the full Census county-year universe, including small counties missing from the mortality export. Counts stay null there.
+- Shannon's code is mapped to Oglala Lakota. Bedford, York County, and Newport News stay flagged for boundary changes; their reported subtotals are retained, but mortality rates are withheld from the main measures. The obsolete Clifton Forge missing placeholder is saved separately.
+- Reported D1 counts remain the main available mortality outcome. Separate 0–9 bounds support sensitivity checks for absent rows; explicit `Missing` values and boundary problems stay unbounded. We aren't filling in deaths.
+- Sample flags and state/year reporting coverage are provided. See [data_cleaning.md](data_cleaning.md#final-checks-and-decisions) for the decisions and source links.

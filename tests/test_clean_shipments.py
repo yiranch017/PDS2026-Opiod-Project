@@ -51,6 +51,22 @@ class CleaningTests(unittest.TestCase):
         for label in ["DISTRIBUTOR", "REVERSE DISTRIB", "MANUFACTURER", "MLP-ANIMAL SHELTER", "HOSPITAL/CLINIC", "M/O PHARMACY"]:
             self.assertNotIn(buyer_group(label), {"pharmacy", "practitioner"})
 
+    def test_documented_geography_changes_match_census_targets(self):
+        reference = pd.DataFrame([
+            {"state": "SD", "state_fips": "46", "county_name": "Oglala Lakota County", "county_fips": "46102", "year": 2010},
+            {"state": "VA", "state_fips": "51", "county_name": "Bedford County", "county_fips": "51019", "year": 2010},
+        ])
+        reference["county_key"] = reference.county_name.map(normalize_county)
+        shipments = pd.DataFrame([
+            {"buyer_state": "SD", "buyer_county": "SHANNON", "year": 2010},
+            {"buyer_state": "VA", "buyer_county": "BEDFORD CITY", "year": 2010},
+            {"buyer_state": "CT", "buyer_county": "ANDERSON", "year": 2010},
+        ])
+        result = match_counties(shipments, reference)
+        self.assertEqual(result.county_fips.iloc[:2].tolist(), ["46102", "51019"])
+        self.assertTrue(result.match_method.iloc[:2].eq("documented_geography_change").all())
+        self.assertTrue(pd.isna(result.county_fips.iloc[2]))
+
     def test_large_shipments_are_flagged_without_removing_their_weight(self):
         matched = pd.DataFrame([
             {"county_fips": "12027", "year": 2010, "drug_code": "9143", "drug_name": "OXYCODONE", "buyer_group": "pharmacy", "base_weight_g": 1009.0, "shipment_records": 10, "largest_shipment_g": 1000.0},
