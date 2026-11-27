@@ -29,6 +29,7 @@ DTYPES = {column: "string" for column in USECOLS}
 
 
 def summarize_chunk(chunk, start_year, end_year):
+    """Filter one ARCOS chunk, audit exclusions, and aggregate retained shipments."""
     """Return additive group totals and audit counts; never impute bad weights."""
     dates = pd.to_datetime(chunk["TRANSACTION_DATE"], format="%Y-%m-%d", errors="coerce")
     years = dates.dt.year
@@ -83,6 +84,7 @@ def summarize_chunk(chunk, start_year, end_year):
 
 
 def merge_summaries(paths, destination):
+    """Reduce intermediate shipment summaries to a single Parquet file."""
     """Read two compact summaries, combining keys that cross chunk boundaries."""
     frames = [pd.read_parquet(path, dtype_backend="pyarrow") for path in paths]
     combined = pd.concat(frames, ignore_index=True)
@@ -186,6 +188,7 @@ def write_json(path, value):
 
 
 def run(args):
+    """Stream the ZIP input and validate the output against source totals."""
     if args.start_year > args.end_year:
         raise ValueError("start-year must be <= end-year")
     if args.chunksize <= 0 or args.pilot_rows <= 0:

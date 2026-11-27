@@ -11,6 +11,8 @@
   "shipment_weight_g": 1315622828.843032,
   "county_years_with_shipments": 30036,
   "county_years_without_shipments": 1094,
+  "county_years_shipments_primary_eligible": 30006,
+  "county_years_without_mortality_source": 344,
   "county_years_with_reported_unintentional_deaths": 6291,
   "joint_primary_eligible_rows": 6291,
   "counties_complete_joint_2006_2015": 341,
@@ -23,5 +25,5 @@
     "shipments_county_year.parquet": "c80ddaaab4f8fc61a35c3563edd38e9b5f94bb6e95b4e50ea23a197d1a86495b",
     "shipments_county_year_drug.parquet": "55e8a083bb89d4ce37ea2e607edd9944e10453617fd265497b0208aa3ce704ea"
   },
-  "note": "All population county-years retained. Primary mortality is reported unintentional drug overdose, not opioid-specific. Missing is not zero. Bedford, York, and Newport News are flagged for boundary changes and excluded from default eligibility. Their mortality rates are withheld. Bounds are for sensitivity, not imputed counts. No controls selected."
+  "note": "All population county-years retained. Primary shipments are total retained base-weight grams per person. Primary mortality is reported unintentional drug overdose, not opioid-specific. Bedford, York, and Newport News are flagged for boundary changes and excluded from default eligibility. Their mortality rates are withheld. Sensitivity bounds apply only to absent causes in county-years present in the mortality export. No controls selected."
 }
