@@ -1,32 +1,47 @@
 # Opioid Policy Project
 
-We examine changes in opioid shipments and overdose mortality following prescribing regulations in Florida (2010) and Washington (2012), using county-year data from 2006–2015.
+We examine changes in opioid shipments and unintentional drug-overdose mortality following prescribing regulations in Florida (2010) and Washington state (2012), using county-year data from 2006–2015. Washington state has FIPS `53`. Washington, DC (`11`) is a separate jurisdiction.
 
 ## Data
 
 - DEA ARCOS shipment records
 - County-level Vital Statistics mortality records
 - County population estimates
+- State opioid policy indicators from the State Policy & Politics Database (SPPD)
+- State background measures from BLS LAUS, Census SAIPE and Population Estimates, and HRSA Area Health Resources Files
 
-## Merged data
+## Analysis inputs
 
-Start with [outputs/county_panel/county_year.parquet](outputs/county_panel/county_year.parquet), or its [CSV copy](outputs/county_panel/county_year.csv). It has one row per county-year: 3,113 counties × 2006–2015 = 31,130 rows, including possible control states. Join keys are `county_fips` (five-character text) and `year`. When reading CSV, specify `dtype={"county_fips": "string", "state_fips": "string"}` to preserve leading zeros.
+| File | Use |
+| --- | --- |
+| [County-year panel](outputs/county_panel/county_year.parquet) ([CSV](outputs/county_panel/county_year.csv)) | Use for shipment, mortality, and population summaries. The panel has 31,130 rows across 3,113 counties and county equivalents. |
+| [County-year panel with policy indicators](outputs/state_policy/county_year_with_policies.parquet) | Use when comparing the same county-year outcomes with state policy history. |
+| [State-year policy table](outputs/state_policy/state_year_policies.parquet) | Review five policy categories and their annual adoption indicators. See the [policy notes](docs/state_policy.md). |
+| [State-year background table](outputs/state_context/state_year_context.parquet) | Compare annual unemployment, median household income, population, age 65+ share, and active non-federal M.D.s per 10,000 residents. See the [context notes](docs/state_context.md). |
+| [Drug-specific shipment rates](outputs/county_panel/shipments_drug_rates.parquet) | Compare base-weight grams per resident separately for each of the 14 ARCOS drug codes. |
+
+Join county tables on `county_fips` and `year`. Join the state-year background table to the policy panel on `state_fips` and `year`. When reading CSV, specify `dtype={"county_fips": "string", "state_fips": "string"}` to preserve leading zeros.
 
 Main fields:
 
 | Field | Meaning |
 | --- | --- |
 | `population` | Annual July 1 Census population |
-| `hydrocodone_oxycodone_g_per_person` | Main shipment measure, grams per resident |
+| `base_weight_g_per_person` | Primary shipment outcome, total retained opioid base-weight grams per resident |
+| `hydrocodone_oxycodone_g_per_person` | Secondary outcome for these two drugs, base-weight grams per resident |
 | `deaths_unintentional_per_100k` | Reported unintentional drug-overdose deaths per 100,000; not opioid-specific |
-| `deaths_unintentional_status` | Reported, absent from export, explicitly missing, or boundary problem |
-| `deaths_unintentional_lower_per_100k`, `deaths_unintentional_upper_per_100k` | Separate suppression sensitivity bounds; not imputed outcomes |
+| `deaths_unintentional_status` | Reported, cause absent, explicitly missing, no mortality source rows for the county-year, or boundary problem |
+| `deaths_unintentional_lower_per_100k`, `deaths_unintentional_upper_per_100k` | Sensitivity bounds for absent causes when the county-year is present in the export |
 | `has_shipment_record` | Whether any retained community-pharmacy/practitioner shipment was found |
 | `shipment_single_transaction_flag` | At least one drug total dominated by one shipment |
 | `mortality_primary_eligible`, `shipments_primary_eligible`, `joint_primary_eligible` | Availability/geography checks, separately by outcome |
 | `joint_complete_2006_2015` | Optional consistent county sample; both primary outcomes available in all ten years |
 
 Missing counts and shipments stay missing. All counties remain in the file; eligibility flags let us choose the analysis sample explicitly. The [cleaning notes](docs/data_cleaning.md#final-checks-and-decisions) explain the exclusions, geography changes, and remaining source limitations. No control states are chosen by the cleaning code.
+
+The shipment outcome covers all 14 opioid codes in the public ARCOS release within the retained buyer and transaction scope. The mortality outcome is D1 unintentional drug-overdose mortality. The source groups deaths by intent and does not identify the drug involved. County-years with no mortality source rows have null sensitivity bounds.
+
+The HRSA physician series has gaps, including 2009. Use comparable observed years when comparing states. The state policy table records adoptions in five tracked categories. Review policy timing and similarity when selecting controls. Control selection and the treatment, post-policy, and event-time variables belong to the analysis stage.
 
 Other shared files:
 
@@ -35,7 +50,6 @@ Other shared files:
 - [Merged-data audit](outputs/county_panel/panel_audit.json)
 - [State/year coverage](outputs/county_panel/coverage_by_state_year.csv)
 - [Large-shipment decisions](outputs/county_panel/shipment_review_decisions.csv)
-- [Drug-specific rates](outputs/county_panel/shipments_drug_rates.parquet)
 
 ## Process shipments
 

@@ -48,9 +48,24 @@ class PanelTests(unittest.TestCase):
         self.assertEqual(index.loc[("01001", 2008), "deaths_unintentional_upper"], 9)
         self.assertTrue(pd.isna(index.loc[("01001", 2008), "deaths_unintentional"]))
         self.assertFalse(index.loc[("01003", 2006), "has_mortality_source_row"])
+        self.assertEqual(index.loc[("01003", 2006), "deaths_unintentional_status"], "no_source_county_year")
+        for bound in ("lower", "upper"):
+            self.assertTrue(pd.isna(index.loc[("01003", 2006), f"deaths_unintentional_{bound}"]))
         self.assertTrue(pd.isna(index.loc[("01003", 2006), "base_weight_g"]))
         self.assertFalse(panel.joint_complete_2006_2015.any())
         self.assertTrue(drugs.grams_per_person.eq(.1).all())
+
+    def test_total_shipments_are_eligible_without_hydrocodone_or_oxycodone(self):
+        population, shipments, deaths, drugs = fixtures()
+        shipments["hydrocodone_oxycodone_g"] = float("nan")
+        shipments["hydrocodone_oxycodone_records"] = None
+        drugs["drug_code"] = "9300"
+        panel, _ = build_panel(population, shipments, deaths, drugs)
+        observed = panel[panel.county_fips.eq("01001")]
+        self.assertTrue(observed.shipments_primary_eligible.all())
+        self.assertTrue(observed.base_weight_g_per_person.eq(.1).all())
+        self.assertFalse(observed.has_hydrocodone_oxycodone_record.any())
+        self.assertEqual(int(panel.joint_primary_eligible.sum()), 1)
 
     def test_duplicate_merge_keys_fail(self):
         population, shipments, deaths, drugs = fixtures()

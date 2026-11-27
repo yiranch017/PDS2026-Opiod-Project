@@ -8,4 +8,6 @@ outputs/*
 !outputs/shipments_clean_final/
 !outputs/population_clean/
 !outputs/county_panel/
+!outputs/state_policy/
+!outputs/state_context/
 *.log

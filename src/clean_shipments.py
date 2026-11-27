@@ -26,6 +26,7 @@ PAIR_CODES = {"9143", "9193"}
 
 
 def buyer_group(value):
+    """Classify buyer activity for the main measure and channel review."""
     if value in PHARMACIES:
         return "pharmacy"
     if value in PRACTITIONERS or re.fullmatch(
@@ -54,6 +55,7 @@ def normalize_county(value):
 
 
 def county_reference(archive_path, start_year, end_year):
+    """Build an annual county lookup from the supplied mortality archive."""
     frames = []
     with zipfile.ZipFile(archive_path) as archive:
         for year in range(start_year, end_year + 1):
@@ -80,6 +82,7 @@ def county_reference(archive_path, start_year, end_year):
 
 
 def match_counties(shipments, reference):
+    """Assign five-digit FIPS codes and retain unresolved locations for review."""
     left = shipments.copy()
     left["county_key"] = left.buyer_county.map(normalize_county)
     result = left.merge(
@@ -123,6 +126,7 @@ def match_counties(shipments, reference):
 
 
 def summarize_main(matched):
+    """Aggregate eligible shipments by county-year and drug."""
     eligible = matched[
         matched.buyer_group.isin(["pharmacy", "practitioner"]) & matched.county_fips.notna()
     ].copy()
@@ -150,6 +154,7 @@ def summarize_main(matched):
 
 
 def clean(args):
+    """Validate the inputs, match counties, and write shipment tables and audits."""
     source_audit = json.loads((args.shipments.parent / "audit.json").read_text())
     if not source_audit.get("validated") or source_audit.get("status") != "complete":
         raise ValueError("Source processing is incomplete or unvalidated")

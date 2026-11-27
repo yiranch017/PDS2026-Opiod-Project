@@ -22,6 +22,7 @@ FIPS_CHANGES = {"46113": "46102", "51515": "51019"}
 
 
 def download_sources(directory):
+    """Download missing Census source files without replacing existing copies."""
     directory.mkdir(parents=True, exist_ok=True)
     for name, url in SOURCES.items():
         path = directory / name
@@ -34,6 +35,7 @@ def download_sources(directory):
 
 
 def prepare_population(early_path, late_path):
+    """Build a balanced county-year denominator from the two Census vintages."""
     frames = []
     sources = []
     state_checks = []
@@ -52,6 +54,7 @@ def prepare_population(early_path, late_path):
         if not counties.county_fips.str.fullmatch(r"\d{5}").all() or counties.COUNTY.str.fullmatch(r"0+").any():
             raise ValueError("Invalid county identifiers")
         for year in years:
+            # Reconcile native county totals before harmonizing county geography.
             value = f"POPESTIMATE{year}"
             population = pd.to_numeric(counties[value], errors="raise")
             if not (np.isfinite(population) & population.gt(0) & population.mod(1).eq(0)).all():
@@ -70,6 +73,7 @@ def prepare_population(early_path, late_path):
             frames.append(frame)
         sources.append({"file": path.name, "url": SOURCES.get(path.name), "sha256": hashlib.sha256(path.read_bytes()).hexdigest()})
     population = pd.concat(frames, ignore_index=True)
+    # Map historical county codes onto the reference geography, then sum components.
     population["source_county_fips"] = population.county_fips
     population["county_fips"] = population.county_fips.replace(FIPS_CHANGES)
     late_names = frames[-1].set_index("county_fips").county_name

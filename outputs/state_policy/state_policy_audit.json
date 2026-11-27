@@ -1,0 +1,22 @@
+{
+  "source": "https://github.com/SPPDindex/SPPD-State-Policy-Index/blob/main/SPPD_V1_3.1.dta",
+  "source_sha256": "3bc3e9b7dc02cc575af71729b152555fef1978b803ce0d71502934972a69645d",
+  "years": [
+    2006,
+    2015
+  ],
+  "tracked_policies": [
+    "pdmp_access",
+    "pdmp_mandate",
+    "pain_clinic_law",
+    "naloxone_access",
+    "good_samaritan"
+  ],
+  "state_year_rows": 510,
+  "county_year_rows": 31130,
+  "state_year_change_counts": {
+    "False": 391,
+    "True": 109,
+    "<NA>": 10
+  }
+}
