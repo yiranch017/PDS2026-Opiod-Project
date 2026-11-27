@@ -75,10 +75,12 @@ def main():
     # Keep all states in the policy table and preserve every county-year in the join.
     jurisdictions = set(source.state_fips.dropna().astype(int).astype(str).str.zfill(2)) | set(panel.state_fips)
     state_year = prepare_state_policies(source, jurisdictions | {"11"})
-    joined = panel[STATE_YEAR].merge(state_year, on=STATE_YEAR, how="left", validate="many_to_one", indicator=True)
-    if len(joined) != len(panel) or not joined["_merge"].eq("both").all():
+    # Match the panel's key types and join by values, independent of its row index.
+    policy_for_merge = state_year.astype(panel[STATE_YEAR].dtypes.to_dict())
+    merged = panel.merge(policy_for_merge, on=STATE_YEAR, how="left", validate="many_to_one", indicator=True)
+    if len(merged) != len(panel) or not merged["_merge"].eq("both").all():
         raise ValueError("State policy merge did not preserve the county-panel keys")
-    merged = panel.join(joined.drop(columns=STATE_YEAR + ["_merge"]))
+    merged = merged.drop(columns="_merge")
     audit = {
         "source": SOURCE_URL,
         "source_sha256": hashlib.sha256(args.sppd.read_bytes()).hexdigest(),
