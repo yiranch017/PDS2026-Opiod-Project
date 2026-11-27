@@ -1,6 +1,26 @@
 # Opioid Policy Project
 
-We examine changes in opioid shipments and unintentional drug-overdose mortality following prescribing regulations in Florida (2010) and Washington state (2012), using county-year data from 2006–2015. Washington state has FIPS `53`. Washington, DC (`11`) is a separate jurisdiction.
+We examine changes in recorded opioid shipments and unintentional drug overdose mortality following prescribing policy changes in Florida (2010) and Washington state (2012). The study uses county-year data from 2006–2015 and is intended for state health department overdose prevention and surveillance teams.
+
+## Analysis and report status
+
+- **Florida** uses Delaware, Pennsylvania, and Michigan as comparison states. The main analysis compares 2006–2009 with 2011–2015 and treats 2010 as a transition year. The [Florida policy memo](docs/florida_analysis.md) explains the results, pre-policy trends, and sensitivity checks.
+- **Washington** is the second case study. Washington's estimates and figures are pending for the joint report.
+- **Team report** is in draft. The current draft includes the Florida findings and provides a place for the Washington analysis and cross-state interpretation.
+
+## Reproduce the Florida analysis
+
+From the repository root, create a virtual environment, install the dependencies, run the tests, and run the [analysis script](src/analyze_policy.py). The analysis reads the checked-in Parquet files described below.
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python -m unittest discover -s tests -v
+python src/analyze_policy.py --output outputs/florida_analysis_local
+```
+
+If you already have a project virtual environment, activate it and start with dependency installation. The analysis command writes to a separate directory so the checked-in results remain available for comparison. Start with the [difference-in-differences figure](outputs/florida_analysis/difference_in_differences.png), [pre-post figure](outputs/florida_analysis/appendix_pre_post.png), and [estimates and sensitivity checks](outputs/florida_analysis/estimates.csv). The [analysis output folder](outputs/florida_analysis) also contains the control-state ranking, coverage, annual trends, and drug-level shipment estimates.
 
 ## Data
 
