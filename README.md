@@ -51,6 +51,10 @@ Other shared files:
 - [State/year coverage](outputs/county_panel/coverage_by_state_year.csv)
 - [Large-shipment decisions](outputs/county_panel/shipment_review_decisions.csv)
 
+## Florida analysis
+
+See the [Florida policy memo and reproducibility notes](docs/florida_analysis.md) for the comparison-state selection, pre-post and difference-in-differences findings, and sensitivity checks.
+
 ## Process shipments
 
 Install the dependencies in `requirements.txt`, then run a sample:

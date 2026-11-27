@@ -11,3 +11,4 @@ outputs/*
 !outputs/state_policy/
 !outputs/state_context/
 *.log
+!outputs/florida_analysis/
