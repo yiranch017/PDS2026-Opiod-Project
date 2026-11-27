@@ -1,0 +1,2 @@
+county_fips,year,county,deaths_unintentional,deaths_suicide,deaths_homicide,deaths_undetermined,deaths_unintentional_reported,deaths_unintentional_status,deaths_suicide_reported,deaths_suicide_status,deaths_homicide_reported,deaths_homicide_status,deaths_undetermined_reported,deaths_undetermined_status,exclusion_reason
+51560,2015,"Clifton Forge city, VA",,,,,False,explicit_missing,False,explicit_missing,False,explicit_missing,False,explicit_missing,Clifton Forge city ceased to be a county equivalent in 2001; source only contains missing placeholders.

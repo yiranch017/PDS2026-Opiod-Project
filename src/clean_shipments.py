@@ -90,6 +90,17 @@ def match_counties(shipments, reference):
     )
     result["match_method"] = np.where(result["_merge"].eq("both"), "normalized_name", "unmatched")
     result = result.drop(columns="_merge")
+    # Documented Census changes, only used when the reference has the target county.
+    historical_names = {("SD", "SHANNON"): "46102", ("VA", "BEDFORDCITY"): "51019"}
+    targets = reference.set_index(["county_fips", "year"])
+    for index, row in result[result.county_fips.isna()].iterrows():
+        target = historical_names.get((row.buyer_state, row.county_key))
+        if target and (target, row.year) in targets.index:
+            match = targets.loc[(target, row.year)]
+            for column in ["state", "state_fips", "county_name"]:
+                result.at[index, column] = match[column]
+            result.at[index, "county_fips"] = target
+            result.at[index, "match_method"] = "documented_geography_change"
     cities = reference[reference.state.eq("VA") & reference.county_name.str.endswith(" city")].copy()
     cities["city_alias"] = cities.county_name.str.replace(r" city$", "", regex=True).map(normalize_county)
     alias_counts = cities.groupby(["state", "city_alias", "year"]).county_fips.transform("nunique")
@@ -171,7 +182,14 @@ def clean(args):
             buyer_summary = within_scope.groupby(["buyer_type", "buyer_group"], as_index=False, observed=True).agg(AGGREGATIONS)
             buyer_summary["included_in_main"] = buyer_summary.buyer_group.isin(["pharmacy", "practitioner"])
             buyer_summary.to_csv(output / "buyer_type_summary.csv", index=False)
-            reference = county_reference(args.mortality_zip, source_audit["start_year"], source_audit["end_year"])
+            if getattr(args, "population", None):
+                reference = pd.read_parquet(args.population)[["state", "state_fips", "county_name", "county_fips", "year"]].copy()
+                reference = reference[reference.year.between(source_audit["start_year"], source_audit["end_year"])]
+                reference["county_key"] = reference.county_name.map(normalize_county)
+                if reference.duplicated(["county_fips", "year"]).any() or reference.duplicated(["state", "county_key", "year"]).any():
+                    raise ValueError("Population reference has ambiguous keys")
+            else:
+                reference = county_reference(args.mortality_zip, source_audit["start_year"], source_audit["end_year"])
             reference.to_csv(output / "county_reference.csv", index=False)
             geo_input = within_scope.groupby(["buyer_state", "buyer_county", "year"], as_index=False, observed=True).agg(AGGREGATIONS)
             geography = match_counties(geo_input, reference)
@@ -228,6 +246,7 @@ def clean(args):
                 flagged_large_county_year_drug_rows=len(review),
                 source_label_disagreements=int(label_review.loc[label_review.label_disagrees, "source_records"].sum()),
                 sampled_peak_rss_mib=round(peak["rss_mib"], 2),
+                county_reference_source="annual_census_population" if getattr(args, "population", None) else "mortality_export",
             )
             if source_records != sum(audit[name] for name in ["outside_scope_records", "excluded_buyer_records", "unmatched_direct_buyer_records", "main_records"]):
                 raise ValueError("Cleaning exclusions do not reconcile")
@@ -248,6 +267,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--shipments", type=Path, required=True)
     parser.add_argument("--mortality-zip", type=Path, required=True)
+    parser.add_argument("--population", type=Path, help="Annual Census county-year table; preferred geographic reference")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--allow-pilot", action="store_true")
     parser.add_argument("--max-memory-mib", type=int, default=1024)
