@@ -1,3 +1,7 @@
 pandas>=2.2,<4
 pyarrow>=15
 psutil>=5.9
+
+# Analysis and figures
+numpy>=1.26
+matplotlib>=3.8
