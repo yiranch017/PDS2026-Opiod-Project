@@ -74,9 +74,10 @@ def unemployment_context(raw):
     return pd.DataFrame(rows, columns=KEYS + ["unemployment_rate_pct"])
 
 
-def physician_context(raw):
+def physician_context(raw, county_population=None):
     """Read fixed-width HRSA counts and sum active non-federal M.D.s by state."""
     tables = []
+    county_counts = []
     for filename, tech_zip, years in HEALTH_FILES:
         with ZipFile(raw / tech_zip) as archive:
             sas_name = next(name for name in archive.namelist() if name.lower().endswith(".sas"))
@@ -100,18 +101,51 @@ def physician_context(raw):
             groups = count.groupby(county.state_fips)
             total = groups.sum(min_count=1).where(groups.count().eq(groups.size()))
             tables.append(total.rename("active_nonfederal_md").reset_index().assign(year=year))
-    return pd.concat(tables, ignore_index=True)
+            if county_population is not None:
+                county_counts.append(pd.DataFrame({
+                    "county_fips": county.f00002, "year": year, "observed_md": count,
+                }))
+    totals = pd.concat(tables, ignore_index=True)
+    if county_population is None:
+        return totals
+    coverage = physician_coverage(county_population, pd.concat(county_counts, ignore_index=True))
+    return totals.merge(coverage, on=KEYS, how="left", validate="one_to_one")
+
+
+def physician_coverage(population, counts):
+    """Calculate physician density using the same counties in both parts of the rate."""
+    keys = ["county_fips", "year"]
+    # Harmonize the Shannon rename. Exclude Bedford and other boundary-review
+    # counties from this rate because the numerator and denominator can differ.
+    counts = counts.assign(county_fips=counts.county_fips.replace({"46113": "46102"}))
+    comparable = ~population.county_fips.isin({"51019", "51199", "51700"})
+    observed = population.loc[comparable].merge(
+        counts.dropna(subset=["observed_md"]), on=keys, how="inner", validate="one_to_one"
+    )
+    coverage = observed.groupby(KEYS, as_index=False).agg(
+        physician_observed_counties=("county_fips", "size"),
+        physician_observed_population=("population", "sum"),
+        physician_observed_md=("observed_md", "sum"),
+    )
+    coverage["active_nonfederal_md_observed_per_10000"] = (
+        coverage.physician_observed_md / coverage.physician_observed_population * 10_000
+    )
+    return coverage
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--raw-dir", type=Path, default=Path("data/raw"))
+    parser.add_argument("--county-population", type=Path,
+                        default=Path("outputs/population_clean/population_county_year.parquet"))
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
     context = age_context(args.raw_dir)
     if len(context) != 510 or context.duplicated(KEYS).any():
         raise ValueError("Expected a unique 51-jurisdiction by 10-year Census grid")
-    for table in (income_context(args.raw_dir), unemployment_context(args.raw_dir), physician_context(args.raw_dir)):
+    population = pd.read_parquet(args.county_population, columns=["county_fips", "state_fips", "year", "population"])
+    for table in (income_context(args.raw_dir), unemployment_context(args.raw_dir),
+                  physician_context(args.raw_dir, population)):
         context = context.merge(table, on=KEYS, how="left", validate="one_to_one")
     if not (
         context.state_population.gt(0).all()
@@ -123,11 +157,17 @@ def main():
     if not context.active_nonfederal_md.dropna().ge(0).all():
         raise ValueError("Invalid physician count")
     context["active_nonfederal_md_per_10000"] = context.active_nonfederal_md / context.state_population * 10_000
+    context["physician_population_coverage_share"] = (
+        context.physician_observed_population / context.state_population
+    )
+    if not context.physician_population_coverage_share.dropna().between(0, 1).all():
+        raise ValueError("Physician coverage falls outside the statewide population")
     context = context.sort_values(KEYS).reset_index(drop=True)
     coverage = {
         "state_year_rows": len(context),
         "observations_by_year": context.groupby("year")[
-            ["unemployment_rate_pct", "median_household_income_usd", "population_65_plus_share", "active_nonfederal_md"]
+            ["unemployment_rate_pct", "median_household_income_usd", "population_65_plus_share",
+             "active_nonfederal_md", "active_nonfederal_md_observed_per_10000"]
         ].count().to_dict(),
     }
     args.output.mkdir(parents=True, exist_ok=False)
